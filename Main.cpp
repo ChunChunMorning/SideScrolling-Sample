@@ -32,14 +32,45 @@ private:
 
 	// ブロックのテキスチャ（画像）
 	Texture m_texture;
-
 };
+
+
+class Player
+{
+public:
+
+	Player() :
+		m_position(100, 200) {}
+
+	void update()
+	{
+		if (Input::KeyRight.pressed)
+		{
+			m_position.x += 5.0;
+		}
+		else if (Input::KeyLeft.pressed)
+		{
+			m_position.x -= 5.0;
+		}
+	}
+
+	void draw()
+	{
+		Circle(m_position, 50).draw();
+	}
+
+private:
+
+	Vec2 m_position;
+};
+
 
 void Main()
 {
 	Window::Resize(1280, 720);
 
 	Texture background(L"Example/Windmill.png");
+	Player player;
 	Array<Block> blocks;
 
 	blocks.push_back(Block({-400, 400, 200, 200}));
@@ -59,6 +90,7 @@ void Main()
 			blocks[i].update();
 		}
 
+		player.update();
 
 
 		// 本来ならリサイズしなくていいように画像を用意すべき.
@@ -68,9 +100,7 @@ void Main()
 		{
 			blocks[i].draw();
 		}
-		if (Input::KeyEnter.clicked)
-		{
-			ScreenCapture::Save(L"IMG/a.png");
-		}
+
+		player.draw();
 	}
 }
