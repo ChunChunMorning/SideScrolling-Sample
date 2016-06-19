@@ -40,8 +40,10 @@ class Player
 public:
 
 	Player() :
-		m_position(100, 200) {}
+		m_position(100, 200),
+		m_texture(L"Example/Siv3D-kun.png") {}
 
+	// 描画以外の操作をする関数
 	void update()
 	{
 		if (Input::KeyRight.pressed)
@@ -54,14 +56,19 @@ public:
 		}
 	}
 
+	// 描画をする関数（描画操作以外行わないこと.）
 	void draw()
 	{
-		Circle(m_position, 50).draw();
+		RectF(m_position.x - 72.5, m_position.y - 200, 145, 200)(m_texture).draw();
 	}
 
 private:
 
+	// プレイヤーの座標
 	Vec2 m_position;
+
+	// プレイヤーのテクスチャ（画像）
+	Texture m_texture;
 };
 
 
