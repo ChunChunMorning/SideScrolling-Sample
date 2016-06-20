@@ -50,7 +50,7 @@ public:
 		{
 			m_position.x += 5.0;
 		}
-		else if (Input::KeyLeft.pressed)
+		if (Input::KeyLeft.pressed)
 		{
 			m_position.x -= 5.0;
 		}
