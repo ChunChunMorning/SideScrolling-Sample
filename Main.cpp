@@ -18,6 +18,12 @@ public:
 		// 今回は何もない
 	}
 
+	// 点との当たり判定を取る関数
+	bool intersects(const Vec2 &shape) const
+	{
+		return m_region.intersects(shape);
+	}
+
 	// 描画をする関数（描画操作以外行わないこと.）
 	void draw()
 	{
@@ -42,6 +48,19 @@ public:
 	Player() :
 		m_position(100, 200),
 		m_texture(L"Example/Siv3D-kun.png") {}
+
+	void checkGround(const Array<Block>& blocks)
+	{
+		m_isGrounded = false;
+
+		for (size_t i = 0; i < blocks.size(); i++)
+		{
+			if (blocks[i].intersects(m_position))
+			{
+				m_isGrounded = true;
+			}
+		}
+	}
 
 	// 描画以外の操作をする関数
 	void update()
@@ -71,6 +90,9 @@ private:
 
 	// プレイヤーのテクスチャ（画像）
 	Texture m_texture;
+
+	// 地面に接しているか否か
+	bool m_isGrounded;
 };
 
 
