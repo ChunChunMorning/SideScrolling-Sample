@@ -46,6 +46,8 @@ public:
 	// 描画以外の操作をする関数
 	void update()
 	{
+		m_position.y += 10.0;
+
 		if (Input::KeyRight.pressed)
 		{
 			m_position.x += 5.0;
