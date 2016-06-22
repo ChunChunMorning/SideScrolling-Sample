@@ -47,7 +47,9 @@ public:
 
 	Player() :
 		m_position(100, 200),
-		m_texture(L"Example/Siv3D-kun.png") {}
+		m_texture(L"Example/Siv3D-kun.png"),
+		m_isGrounded(false),
+		m_jumpFrame(0) {}
 
 	void checkGround(const Array<Block>& blocks)
 	{
@@ -65,9 +67,22 @@ public:
 	// 描画以外の操作をする関数
 	void update()
 	{
-		if (!m_isGrounded)
+		if (m_isGrounded)
+		{
+			if (Input::KeySpace.clicked && m_jumpFrame <= 0)
+			{
+				m_jumpFrame = 30;
+			}
+		}
+		else
 		{
 			m_position.y += 10.0;
+		}
+
+		if (m_jumpFrame > 0)
+		{
+			m_position.y -= 20.0;
+			m_jumpFrame--;
 		}
 		if (Input::KeyRight.pressed)
 		{
@@ -95,6 +110,9 @@ private:
 
 	// 地面に接しているか否か
 	bool m_isGrounded;
+
+	// 残りのジャンプ時間
+	int m_jumpFrame;
 };
 
 
