@@ -5,18 +5,20 @@ class Block
 {
 public:
 
-	// 引数のないコンストラクタも作っておくといろいろ便利.
 	Block() {}
 
 	Block(const RectF& region) :
 		m_region(region),
 		m_texture(L"Example/Brick.jpg") {}
 
-	// 描画以外の操作をする関数
-	void update()
+	// プレイヤーの現在位置を更新する関数
+	void setPlayerPosition(const Vec2& pos)
 	{
-		// 今回は何もない
+		m_playerPosition = pos;
 	}
+
+	// 描画以外の操作をする関数
+	void update() {}
 
 	// 点との当たり判定を取る関数
 	bool intersects(const Vec2 &shape) const
@@ -27,7 +29,7 @@ public:
 	// 描画をする関数（描画操作以外行わないこと.）
 	void draw()
 	{
-		m_region(m_texture).draw();
+		m_region.movedBy(-m_playerPosition)(m_texture).draw();
 	}
 
 
@@ -38,6 +40,9 @@ private:
 
 	// ブロックのテキスチャ（画像）
 	Texture m_texture;
+
+	// プレイヤーの現在の位置
+	Vec2 m_playerPosition;
 };
 
 
@@ -51,6 +56,12 @@ public:
 		m_isGrounded(false),
 		m_jumpFrame(0) {}
 
+	Vec2 getPos()
+	{
+		return m_position;
+	}
+
+	// 地面に接しているかを更新する関数
 	void checkGround(const Array<Block>& blocks)
 	{
 		m_isGrounded = false;
@@ -97,7 +108,7 @@ public:
 	// 描画をする関数（描画操作以外行わないこと.）
 	void draw()
 	{
-		RectF(m_position.x - 72.5, m_position.y - 200, 145, 200)(m_texture).draw();
+		RectF(Vec2(-72.5, -200), 145, 200)(m_texture).draw();
 	}
 
 private:
@@ -138,14 +149,13 @@ void Main()
 	{
 		for (size_t i = 0; i < blocks.size(); i++)
 		{
+			blocks[i].setPlayerPosition(player.getPos());
 			blocks[i].update();
 		}
 
 		player.checkGround(blocks);
 		player.update();
 
-
-		// 本来ならリサイズしなくていいように画像を用意すべき.
 		background.scale(1280.0 / 480.0).draw();
 
 		for (size_t i = 0; i < blocks.size(); i++)
