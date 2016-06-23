@@ -12,7 +12,7 @@ public:
 		m_texture(L"Example/Brick.jpg") {}
 
 	// プレイヤーの現在位置を更新する関数
-	void setPlayerPosition(const Vec2& pos)
+	void setPlayerPos(const Vec2& pos)
 	{
 		m_playerPosition = pos;
 	}
@@ -29,7 +29,7 @@ public:
 	// 描画をする関数（描画操作以外行わないこと.）
 	void draw()
 	{
-		m_region.movedBy(-m_playerPosition)(m_texture).draw();
+		m_region.movedBy(-m_playerPosition + Window::Center())(m_texture).draw();
 	}
 
 
@@ -108,7 +108,7 @@ public:
 	// 描画をする関数（描画操作以外行わないこと.）
 	void draw()
 	{
-		RectF(Vec2(-72.5, -200), 145, 200)(m_texture).draw();
+		RectF(Vec2(-72.5, -200) + Window::Center(), 145, 200)(m_texture).draw();
 	}
 
 private:
@@ -149,7 +149,7 @@ void Main()
 	{
 		for (size_t i = 0; i < blocks.size(); i++)
 		{
-			blocks[i].setPlayerPosition(player.getPos());
+			blocks[i].setPlayerPos(player.getPos());
 			blocks[i].update();
 		}
 
