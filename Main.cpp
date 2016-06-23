@@ -56,6 +56,7 @@ public:
 		m_isGrounded(false),
 		m_jumpFrame(0) {}
 
+	// 位置を取得する関数
 	Vec2 getPos()
 	{
 		return m_position;
