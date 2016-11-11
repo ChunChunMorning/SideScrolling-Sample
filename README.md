@@ -1,9 +1,9 @@
 # SideScrolling-Sample
 Siv3Dで横スクロールゲームを作るときのサンプル
 
-詳細な解説は下記参照
+詳細な解説はSiv3D公式リファレンス、入門チュートリアルから見ることができます。
 
-[あさちゅんのゲームブログ 「Siv3Dで横スクロールゲームを作る」](http://chungames.hateblo.jp/archive/category/Siv3Dで横スクロールゲームを作る)
+[Siv3Dリファレンス 横スクロールゲームを作ろう](https://github.com/Siv3D/Reference-JP/wiki/%E6%A8%AA%E3%82%B9%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0%E3%82%92%E4%BD%9C%E3%82%8D%E3%81%86)
 
 ## 改良案
 ### 1. ゲームオーバーの実装
