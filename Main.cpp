@@ -157,7 +157,7 @@ void Main()
 		player.checkGround(blocks);
 		player.update();
 
-		background.scale(1280.0 / 480.0).draw();
+		Rect(Window::Size())(background).draw();
 
 		for (size_t i = 0; i < blocks.size(); i++)
 		{
